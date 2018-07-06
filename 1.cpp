@@ -5,6 +5,8 @@ dup2 x
 close x 
 execvp x
 
+Przy ls -l jako pierwszy argument nie dziala, poprawic
+
 */
 
 #include <iostream>
@@ -21,6 +23,8 @@ struct program_data
     std::string name;
     std::vector<std::string> args;
 } program_data1, program_data2;
+
+void show_contents(program_data vector); // Wyswietla zawartosc struktury program_data
 
 int main(int argc, char *argv[])
 {
@@ -113,4 +117,11 @@ int main(int argc, char *argv[])
     wait(&pid);
 
     return 0;
+}
+
+void show_contents(program_data vector){
+    std::cout << vector.name << std::endl;
+    for(int i = 0; i < vector.args.size(); i++ ) {
+        std::cout << program_data1.args[i] << std::endl;
+    }
 }
