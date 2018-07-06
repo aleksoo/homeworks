@@ -54,7 +54,6 @@ int main(int argc, char *argv[]){
     }  
     */
 
-    // TODO: zeby odpalal sie wybrany program przez argument
 
     pid_t pid=fork();
 
@@ -62,8 +61,6 @@ int main(int argc, char *argv[]){
         // Jestem w dziecku
         std::cout << "I'm in child process" << std::endl;
 
-        //const char arg1[program_data1.size()];
-        //memcpy(arg1, program_data1.data(), program_data1.size());
         std::vector<char*> arg1;
         
         for(auto const& a : program_data1.args) {
@@ -78,7 +75,7 @@ int main(int argc, char *argv[]){
     else if(pid>0){
         // Jestem w rodzicu
         std::cout << "Child PID = " << pid << std::endl;
-        
+        /*
         std::vector<char*> arg2;
 
         for(auto const& a : program_data2.args){
@@ -87,7 +84,7 @@ int main(int argc, char *argv[]){
         program_data2.args.push_back(nullptr);
         
         execvp(program_data2.name.c_str(), arg2.data());
-
+        */
         wait(&pid);
         
         std::cout << "Child PID = " << pid << std::endl; // dlaczego tutaj zwraca mi zero? czy jest to skonczony proces?
