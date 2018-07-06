@@ -1,9 +1,9 @@
 /*
-fork
+fork x
 pipe
 dup2
 close
-execvp
+execvp x
 
 */
 
@@ -52,16 +52,24 @@ int main(int argc, char *argv[]){
         std::cout << program_data2.args[i] << std::endl;
     }  
     */
-
+   int pipe1[2];
+   pipe(pipe1);
+   
+   if(pipe(pipe1)==-1) {
+       perror("pipe");
+       exit(EXIT_FAILURE);
+   }
 
     pid_t pid=fork();
 
     if(pid==0){
-        // Jestem w dziecku
+        // Jestem w potomnym procesie
+        close(pipe1[1]);
+
         std::cout << "I'm in child process" << std::endl;
 
         std::vector<char*> arg1;
-        
+        arg1.emplace_back(const_cast<char*>(program_data1.name.c_str()));        
         for(auto const& a : program_data1.args) {
             arg1.emplace_back(const_cast<char*>(a.c_str()));
         }
@@ -75,24 +83,25 @@ int main(int argc, char *argv[]){
         // Jestem w rodzicu
         std::cout << "Child PID = " << pid << std::endl;
         
-        std::vector<char*> arg2;
+        
 
+        std::vector<char*> arg2;
+        arg2.emplace_back(const_cast<char*>(program_data2.name.c_str()));
         for(auto const& a : program_data2.args){
             arg2.emplace_back(const_cast<char*>(a.c_str()));
         }
         arg2.push_back(nullptr);
         
-        wait(&pid);
+        
         execvp(program_data2.name.c_str(), arg2.data());
-        
-        
-        
-        std::cout << "Child PID = " << pid << std::endl; // dlaczego tutaj zwraca mi zero? czy jest to skonczony proces?
     } 
     else if(pid<0) {
         exit(EXIT_FAILURE);
         std::cout << "Error, pid=-1" << std::endl;
     }
+    
+    wait(&pid);
+    wait(&pid);
 
     return 0;
 }
