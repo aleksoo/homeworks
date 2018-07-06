@@ -47,7 +47,6 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < program_data1.args.size(); i++ ) {
         std::cout << program_data1.args[i] << std::endl;
     }
-
     std::cout << program_data2.name << std::endl;
     for(int i = 0; i < program_data2.args.size(); i++ ) {
         std::cout << program_data2.args[i] << std::endl;
@@ -66,7 +65,7 @@ int main(int argc, char *argv[]){
         for(auto const& a : program_data1.args) {
             arg1.emplace_back(const_cast<char*>(a.c_str()));
         }
-        program_data1.args.push_back(nullptr);
+        arg1.push_back(nullptr);
 
         execvp(program_data1.name.c_str(), arg1.data());
         
@@ -75,17 +74,18 @@ int main(int argc, char *argv[]){
     else if(pid>0){
         // Jestem w rodzicu
         std::cout << "Child PID = " << pid << std::endl;
-        /*
+        
         std::vector<char*> arg2;
 
         for(auto const& a : program_data2.args){
             arg2.emplace_back(const_cast<char*>(a.c_str()));
         }
-        program_data2.args.push_back(nullptr);
+        arg2.push_back(nullptr);
         
-        execvp(program_data2.name.c_str(), arg2.data());
-        */
         wait(&pid);
+        execvp(program_data2.name.c_str(), arg2.data());
+        
+        
         
         std::cout << "Child PID = " << pid << std::endl; // dlaczego tutaj zwraca mi zero? czy jest to skonczony proces?
     } 
