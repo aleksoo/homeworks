@@ -45,17 +45,6 @@ int main(int argc, char *argv[])
     while (std::getline(second_string, input_string_2, ' '))
         program_data2.args.push_back(input_string_2);
 
-    /*
-    // Wyswietlanie zawartosci dwoch vectorow
-    std::cout << program_data1.name << std::endl;
-    for(int i = 0; i < program_data1.args.size(); i++ ) {
-        std::cout << program_data1.args[i] << std::endl;
-    }
-    std::cout << program_data2.name << std::endl;
-    for(int i = 0; i < program_data2.args.size(); i++ ) {
-        std::cout << program_data2.args[i] << std::endl;
-    }  
-    */
     int pipe1[2];
     pipe(pipe1);
 
@@ -91,10 +80,10 @@ int main(int argc, char *argv[])
     {
         // Proces parent
         std::cout << "Child PID = " << pid << std::endl;
-
+        
         close(pipe1[1]);
         dup2(pipe1[0], 0);
-
+        
         std::vector<char *> arg2;
         arg2.emplace_back(const_cast<char *>(program_data2.name.c_str()));
         for (auto const &a : program_data2.args)
