@@ -1,11 +1,4 @@
 /*
-fork x
-pipe x 
-dup2 x 
-close x 
-execvp x
-
-Przy ls -l jako pierwszy argument nie dziala, poprawic
 
 */
 
@@ -22,14 +15,17 @@ struct program_data
 {
     std::string name;
     std::vector<std::string> args;
-} program_data1, program_data2;
+};
 
 void show_contents(program_data vector); // Wyswietla zawartosc struktury program_data
 
 int main(int argc, char *argv[])
 {
+    program_data program_data1, program_data2;
+
+    std::vector<program_data> data_vector; // wektor struktur
+
     std::string input_string;
-    std::string input_string_2;
 
     std::getline(std::cin, input_string);
 
@@ -37,13 +33,14 @@ int main(int argc, char *argv[])
     std::istringstream second_string(input_string);
 
     // Getline w while iteruje sie poki nie dojdzie do konca lub dojdzie do znaku "|"
+
+    // TODO: Na poczatku mam przeiterowac do pierwszego znaku |, pozniej to co mi wrzuci do niego zinterpretowac odpowiednio
+    // , cos w stylu wczytuje pierwszy wyraz do pola name, reszte do vectora i tak dalej i tak dalej
+    // chyba jakims forem to zrobic, moze whilem, na pewno musze pomyslec o iteratorze zeby powpisywac do data_vector odpowiednio
     std::getline(second_string, program_data1.name, ' '); // Wrzucam nazwe programu
-    while ((std::getline(second_string, input_string_2, ' ')) && (input_string_2 != "|"))
+    while ((std::getline(second_string, data_vector, ' ')) && (input_string_2 != "|"))
         program_data1.args.push_back(input_string_2);
 
-    std::getline(second_string, program_data2.name, ' ');
-    while (std::getline(second_string, input_string_2, ' '))
-        program_data2.args.push_back(input_string_2);
 
     int pipe1[2];
     pipe(pipe1);
@@ -111,6 +108,6 @@ int main(int argc, char *argv[])
 void show_contents(program_data vector){
     std::cout << vector.name << std::endl;
     for(int i = 0; i < vector.args.size(); i++ ) {
-        std::cout << program_data1.args[i] << std::endl;
+        std::cout << vector.args[i] << std::endl;
     }
 }
