@@ -33,6 +33,7 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "killer.h": "c"
+        "killer.h": "c",
+        "deque": "cpp"
     }
 }
