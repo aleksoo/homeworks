@@ -111,18 +111,20 @@ void Tron::map_state(){
 
 void Tron::get_info(void){
     
-    load_dim();    
+    load_dim();   
+    //move_x(); 
     load_map();
     move_x();
     //map_state();
     load_pos();
     check_dir();
+    //move_x();
     
     
 }
 
 void Tron::move_x(void){
-    //std::cout << *std::max_element(dir.begin(), dir.end());    
+    //std::cout << std::max_element(dir.begin(), dir.end()) + 1;    
     std::cout << 2;
 }
 
