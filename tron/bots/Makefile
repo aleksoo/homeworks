@@ -1,6 +1,11 @@
-end: main.o killer.o
-	g++ killer.o main.o
-killer.o: killer.cpp
-	g++ -c killer.cpp killer.h
+a.out: clean main.o killer3.o
+	g++ killer3.o main.o
+
+killer3.o: killer3.cpp Makefile
+	g++ -O0 -g -c killer3.cpp
+
 main.o: main.cpp
-	g++ -c main.cpp
+	g++ -O0 -g -c main.cpp
+
+clean:
+	rm -f killer3.o main.o a.out

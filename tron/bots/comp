@@ -1,0 +1,4 @@
+#!/bin/bash
+make
+./a.out < ../maps/$1
+cat plik.txt

@@ -34,6 +34,8 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "killer.h": "c",
-        "deque": "cpp"
+        "deque": "cpp",
+        "ctime": "cpp",
+        "iomanip": "cpp"
     }
 }

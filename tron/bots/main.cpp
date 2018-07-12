@@ -1,10 +1,11 @@
 #include <iostream>
-#include "killer.h"
+#include "killer3.h"
+#include <stdio.h>
 
 int main(){
+    freopen("plik.txt","w", stderr);
     Tron killer;
-    killer.get_info();
-    //killer.show_info();
-    //killer.move_x();
+    killer.loadData();
+    killer.makeMove();
     return 0;
 }

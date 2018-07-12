@@ -7,7 +7,7 @@
 
 #include "killer.h"
 
-void Tron::load_dim(){
+void Tron::load_dim(){//
     std::string dim_string;
     getline(std::cin, dim_string, ' ');
     dim.push_back(std::stoi(dim_string));
@@ -15,7 +15,7 @@ void Tron::load_dim(){
     dim.push_back(std::stoi(dim_string));
 }
 
-void Tron::load_map(){
+void Tron::load_map(){ //
     std::string map_string;
     while(getline(std::cin, map_string)){
         map.push_back(map_string);
