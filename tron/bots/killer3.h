@@ -15,6 +15,8 @@ class Tron{
 
     void loadData();
     void makeMove();
+    int getPos1(int); //1 zwraca row, 0 zwraca col
+    int getPos2(int); //1 zwraca row, 0 zwraca col
 
     private:
     
@@ -26,7 +28,7 @@ class Tron{
     /*
     ROW - TUTAJ JEST WYSOKOSC MAPY, GORA DOL arena[ROW][], 
     PORUSZAM SIE PO STRINGACH, NIE ICH ZAWARTOSCI
-    
+
     COL - DO TEGO JEST WPISANA SZEROKOSC MAPY, CZYLI SLUZY
     DO PORUSZANIA SIE NA BOKI TYPU arena[][COL] BO PORUSZAM
     SIE PO STRINGU, STRING TO JEDNA LINIA 
@@ -36,7 +38,7 @@ class Tron{
     void loadDim();
     void loadArena();
     void loadPos();
-    void loadDir();
+    void loadDir(const int&, const int&);
 
 };
 
