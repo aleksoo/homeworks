@@ -1,3 +1,6 @@
+#ifndef KILLER3_H
+#define KILLER3_H
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -6,10 +9,6 @@
 #include <unistd.h>
 #include <cmath>
 #include <algorithm>
-
-#ifndef KILLER3_H
-#define KILLER3_H
-
 
 class Tron{
     public:
@@ -40,7 +39,7 @@ class Tron{
     void loadDim();
     void loadArena();
     void loadPos();
-    void loadDir(const int&, const int&, std::vector<int>&); //
+    void loadDir(const int, const int, std::vector<int>&); //
     int maxEl(const std::vector<int>&);
 
 };

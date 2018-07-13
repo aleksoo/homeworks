@@ -1,5 +1,8 @@
-a.out: clean main.o killer3.o
-	g++ killer3.o main.o
+a.out: clean main.o killer3.o graph.o
+	g++ killer3.o graph.o main.o
+
+graph.o: graph.cpp
+	g++ -O0 -g -c graph.cpp
 
 killer3.o: killer3.cpp Makefile
 	g++ -O0 -g -c killer3.cpp
