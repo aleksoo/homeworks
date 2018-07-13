@@ -36,6 +36,7 @@
         "killer.h": "c",
         "deque": "cpp",
         "ctime": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "string": "cpp"
     }
 }

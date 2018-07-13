@@ -5,6 +5,7 @@
 #include <ctime>
 #include <unistd.h>
 #include <cmath>
+#include <algorithm>
 
 #ifndef KILLER3_H
 #define KILLER3_H
@@ -21,7 +22,8 @@ class Tron{
     private:
     
     std::vector<std::string> arena;
-    std::vector<int> direction;
+    std::vector<int> direction1;
+    std::vector<int> direction2;
     int pos1_row, pos1_col;
     int pos2_row, pos2_col;
     int arena_row, arena_col;
@@ -38,7 +40,8 @@ class Tron{
     void loadDim();
     void loadArena();
     void loadPos();
-    void loadDir(const int&, const int&);
+    void loadDir(const int&, const int&, std::vector<int>&); //
+    int maxEl(const std::vector<int>&);
 
 };
 

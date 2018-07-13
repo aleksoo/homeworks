@@ -16,7 +16,8 @@
 ###############
 11 11
 3 3
-Gora: 1
-Dol: 1
-Prawo: 1
-Lewo: 1
+========= 
+Gora: 10
+Dol: 2
+Prawo: 2
+Lewo: 10
