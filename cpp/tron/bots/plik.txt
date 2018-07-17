@@ -21,3 +21,4 @@ Gora: 10
 Dol: 2
 Prawo: 2
 Lewo: 10
+Test

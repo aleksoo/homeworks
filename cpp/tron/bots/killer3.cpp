@@ -31,6 +31,8 @@ void Tron::loadPos(){
                 pos2_col = j;
             }
         }
+        position1 = std::pair<int, int>(pos1_row, pos1_col);
+        position2 = std::pair<int, int>(pos2_row, pos2_col);
         std::cerr << pos1_row << ' ' << pos1_col << std::endl;
         std::cerr << pos2_row << ' ' << pos2_col << std::endl;
 }
@@ -92,7 +94,70 @@ void Tron::loadDir(const int check_row, const int check_col, std::vector<int> &d
 void Tron::loadData(){
     loadDim();
     loadArena();
-    loadPos();
+    loadPos();    
+}
+
+
+
+void Tron::bfs(){
+    std::queue<std::pair<int, int>> myqueue; // kolejka wezlow do odwiedzenia
+    std::cerr << "Test" << std::endl;
+
+    std::vector<std::vector<bool>>visited; // stany czy cos zostalo odwiedzone
+    std::vector<std::pair<int, int>> parents; //stany rodzicow
+    std::vector<bool> pos_state;
+    std::pair<int, int> position(pos1_row, pos1_col);
+
+    visited.resize(arena_row, std::vector<bool>(arena_col)); // resize areny booli
+    
+
+    myqueue.push(position1);
+    visited[position.first][position.second]=true;
+
+    while(!myqueue.empty()){
+        
+        std::pair<int, int> para;
+        para = myqueue.front();
+        myqueue.pop();
+
+        //if(!visited[para.first][para.second]) <- cz
+        if(arena[para.first][para.second] == '2'){
+            // zwrocic sciezke, bo znalezlismy przeciwnika, pozniej mozna zmienic na co innego
+            std::cerr << para.first << ' ' << para.second << std::endl;
+        }
+
+        //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
+
+        //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany
+        
+        pos_state = isWall(position1.first, position1.second);
+        
+
+        if(pos_state[0]) myqueue.emplace(std::pair<int, int>(position.first-1, position.second)); //gora
+        if(pos_state[1]) myqueue.emplace(std::pair<int, int>(position.first, position.second+1)); //prawo
+        if(pos_state[2]) myqueue.emplace(std::pair<int, int>(position.first+1, position.second)); //dol
+        if(pos_state[3]) myqueue.emplace(std::pair<int, int>(position.first, position.second-1)); //lewo
+        //std::cerr << pos_state[0] << ' ' << pos_state[1] << ' ' << pos_state[2] << ' ' << pos_state[3] << std::endl;
+        
+        parents.emplace_back(position);
+    
+    }
+
+
+}
+
+std::vector<bool> Tron::isWall(const int row, const int col){
+    std::vector<bool> directions;
+    directions.resize(4);
+    if(arena[ row - 1 ][ col ] == ' ') directions[0]=true;
+    else directions[0]=false;
+    if(arena[ row + 1 ][ col ] == ' ') directions[2]=true;
+    else directions[2]=false;
+    if(arena[ row ][ col + 1 ] == ' ') directions[1]=true;
+    else directions[1]=false;
+    if(arena[ row ][ col - 1 ] == ' ') directions[3]=true;
+    else directions[3]=false;
+    return directions;
 }
 
 int Tron::maxEl(const std::vector<int> &wektor){
@@ -106,6 +171,7 @@ int Tron::maxEl(const std::vector<int> &wektor){
 void Tron::makeMove(){
 
     loadDir(pos1_row, pos1_col, direction1);
+    bfs();
     //loadDir(pos2_row, pos2_col, direction2);
     //struct timespec ts;
     //clock_gettime(CLOCK_MONOTONIC, &ts);
