@@ -105,7 +105,7 @@ void Tron::bfs(){
 
     std::vector<std::vector<bool>>visited; // stany czy cos zostalo odwiedzone
     std::vector<std::pair<int, int>> parents; //stany rodzicow
-    std::vector<bool> pos_state;
+    std::vector<bool> pos_state; // mozliwe drogi z danego polozenia
     std::pair<int, int> position(pos1_row, pos1_col);
 
     visited.resize(arena_row, std::vector<bool>(arena_col)); // resize areny booli
@@ -117,30 +117,35 @@ void Tron::bfs(){
     while(!myqueue.empty()){
         
         std::pair<int, int> para;
-        para = myqueue.front();
+        para = myqueue.front(); // czyta aktualna pozycje, "para" staje sie aktualnym polozeniem
         myqueue.pop();
+        std::cerr << para.first << ' ' << para.second << std::endl; 
+        //if(!visited[para.first][para.second])
+            if(arena[para.first][para.second] == '2'){
+                // zwrocic sciezke, bo znalezlismy przeciwnika, pozniej mozna zmienic na co innego
+                std::cerr << para.first << ' ' << para.second << std::endl;
+            }
 
-        //if(!visited[para.first][para.second]) <- cz
-        if(arena[para.first][para.second] == '2'){
-            // zwrocic sciezke, bo znalezlismy przeciwnika, pozniej mozna zmienic na co innego
-            std::cerr << para.first << ' ' << para.second << std::endl;
-        }
+            //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
 
-        //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
-
-        //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany
+            //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany
+            
+            pos_state = isWall(position1.first, position1.second);
+            
+            // sprawdzic czy zostalo odwiedzone, jakis find z vectora odwiedzonych pol
+            // do ifa dac || visited[][]
+            if(pos_state[0] && !visited[para.first-1][para.second]) 
+                myqueue.emplace(std::pair<int, int>(para.first-1, para.second)); //gora
+            if(pos_state[1] && !visited[para.first][para.second+1]) 
+                myqueue.emplace(std::pair<int, int>(para.first, para.second+1)); //prawo
+            if(pos_state[2] && !visited[para.first+1][para.second]) 
+                myqueue.emplace(std::pair<int, int>(para.first+1, para.second)); //dol
+            if(pos_state[3] && !visited[para.first][para.second-1]) 
+                myqueue.emplace(std::pair<int, int>(para.first, para.second-1)); //lewo
+            //std::cerr << pos_state[0] << ' ' << pos_state[1] << ' ' << pos_state[2] << ' ' << pos_state[3] << std::endl;
+            
+            parents.emplace_back(position);
         
-        pos_state = isWall(position1.first, position1.second);
-        
-
-        if(pos_state[0]) myqueue.emplace(std::pair<int, int>(position.first-1, position.second)); //gora
-        if(pos_state[1]) myqueue.emplace(std::pair<int, int>(position.first, position.second+1)); //prawo
-        if(pos_state[2]) myqueue.emplace(std::pair<int, int>(position.first+1, position.second)); //dol
-        if(pos_state[3]) myqueue.emplace(std::pair<int, int>(position.first, position.second-1)); //lewo
-        //std::cerr << pos_state[0] << ' ' << pos_state[1] << ' ' << pos_state[2] << ' ' << pos_state[3] << std::endl;
-        
-        parents.emplace_back(position);
-    
     }
 
 
