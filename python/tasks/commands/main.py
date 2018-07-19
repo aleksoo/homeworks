@@ -63,6 +63,9 @@ def main(argv):
 
     # !!!Your code here!!!
 
+    getopt.getopt(argv[1:], 'h:v', ['help', 'verbose'])
+
+
     logger = _configlog(loglevel)
     logger.debug('START')
     try:
