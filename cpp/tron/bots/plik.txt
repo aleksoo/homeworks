@@ -1,192 +1,35 @@
-16 15
-################
-#              #
-#              #
-#              #
-#     #  #     #
-#     #  #     #
-#   ###  ###   #
-#   1      2   #
-#   ###  ###   #
-#     #  #     #
-#     #  #     #
-#              #
-#              #
-#              #
-################
-7 4
-7 11
+15 15
+###############
+#             #
+# # # # # # # #
+#  2          #
+# # # # # # # #
+#             #
+# # # # # # # #
+#             #
+# # # # # # # #
+#             #
+# # # # # # # #
+#          1  #
+# # # # # # # #
+#             #
+###############
+11 11
+3 3
 ========= 
-Test
-Obecna pozycja: 7 4
-Parent pozycji: 0 0
-
-Obecna pozycja: 7 5
-Parent pozycji: 7 4
-
-Obecna pozycja: 7 3
-Parent pozycji: 7 4
-
-Obecna pozycja: 7 6
-Parent pozycji: 7 5
-
-Obecna pozycja: 6 3
-Parent pozycji: 7 3
-
-Obecna pozycja: 8 3
-Parent pozycji: 7 3
-
-Obecna pozycja: 7 2
-Parent pozycji: 7 3
-
-Obecna pozycja: 7 7
-Parent pozycji: 7 6
-
-Obecna pozycja: 5 3
-Parent pozycji: 6 3
-
-Obecna pozycja: 6 2
-Parent pozycji: 6 3
-
-Obecna pozycja: 9 3
-Parent pozycji: 8 3
-
-Obecna pozycja: 8 2
-Parent pozycji: 8 3
-
-Obecna pozycja: 7 1
-Parent pozycji: 7 2
-
-Obecna pozycja: 6 7
-Parent pozycji: 7 7
-
-Obecna pozycja: 7 8
-Parent pozycji: 7 7
-
-Obecna pozycja: 8 7
-Parent pozycji: 7 7
-
-Obecna pozycja: 4 3
-Parent pozycji: 5 3
-
-Obecna pozycja: 5 4
-Parent pozycji: 5 3
-
-Obecna pozycja: 5 2
-Parent pozycji: 5 3
-
-Obecna pozycja: 6 1
-Parent pozycji: 6 2
-
-Obecna pozycja: 9 4
-Parent pozycji: 9 3
-
-Obecna pozycja: 10 3
-Parent pozycji: 9 3
-
-Obecna pozycja: 9 2
-Parent pozycji: 9 3
-
-Obecna pozycja: 8 1
-Parent pozycji: 8 2
-
-Obecna pozycja: 5 7
-Parent pozycji: 6 7
-
-Obecna pozycja: 6 8
-Parent pozycji: 6 7
-
-Obecna pozycja: 7 9
-Parent pozycji: 7 8
-
-Obecna pozycja: 8 8
-Parent pozycji: 7 8
-
-Obecna pozycja: 9 7
-Parent pozycji: 8 7
-
-Obecna pozycja: 3 3
-Parent pozycji: 4 3
-
-Obecna pozycja: 4 4
-Parent pozycji: 4 3
-
-Obecna pozycja: 4 2
-Parent pozycji: 4 3
-
-Obecna pozycja: 5 5
-Parent pozycji: 5 4
-
-Obecna pozycja: 5 1
-Parent pozycji: 5 2
-
-Obecna pozycja: 9 5
-Parent pozycji: 9 4
-
-Obecna pozycja: 10 4
-Parent pozycji: 9 4
-
-Obecna pozycja: 11 3
-Parent pozycji: 10 3
-
-Obecna pozycja: 10 2
-Parent pozycji: 10 3
-
-Obecna pozycja: 9 1
-Parent pozycji: 9 2
-
-Obecna pozycja: 4 7
-Parent pozycji: 5 7
-
-Obecna pozycja: 5 8
-Parent pozycji: 5 7
-
-Obecna pozycja: 7 10
-Parent pozycji: 7 9
-
-Obecna pozycja: 9 8
-Parent pozycji: 8 8
-
-Obecna pozycja: 10 7
-Parent pozycji: 9 7
-
-Obecna pozycja: 2 3
-Parent pozycji: 3 3
-
-Obecna pozycja: 3 4
-Parent pozycji: 3 3
-
-Obecna pozycja: 3 2
-Parent pozycji: 3 3
-
-Obecna pozycja: 4 5
-Parent pozycji: 4 4
-
-Obecna pozycja: 4 1
-Parent pozycji: 4 2
-
-Obecna pozycja: 10 5
-Parent pozycji: 9 5
-
-Obecna pozycja: 11 4
-Parent pozycji: 10 4
-
-Obecna pozycja: 12 3
-Parent pozycji: 11 3
-
-Obecna pozycja: 11 2
-Parent pozycji: 11 3
-
-Obecna pozycja: 10 1
-Parent pozycji: 10 2
-
-Obecna pozycja: 3 7
-Parent pozycji: 4 7
-
-Obecna pozycja: 4 8
-Parent pozycji: 4 7
-
-Obecna pozycja: 7 11
-Parent pozycji: 7 10
-
-Znaleziona 2 7 11
+Znaleziona 2: 3 3
+Powrot na pole: 3 4
+Powrot na pole: 3 5
+Powrot na pole: 3 6
+Powrot na pole: 3 7
+Powrot na pole: 3 8
+Powrot na pole: 3 9
+Powrot na pole: 3 10
+Powrot na pole: 3 11
+Powrot na pole: 4 11
+Powrot na pole: 5 11
+Powrot na pole: 6 11
+Powrot na pole: 7 11
+Powrot na pole: 8 11
+Powrot na pole: 9 11
+Powrot na pole: 10 11

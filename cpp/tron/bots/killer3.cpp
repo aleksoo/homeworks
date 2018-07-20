@@ -129,19 +129,16 @@ void Tron::loadData()
 void Tron::bfs()
 {
     std::queue<std::pair<int, int>> myqueue; // kolejka wezlow do odwiedzenia
-    std::cerr << "Test" << std::endl;
-
-    std::vector<std::vector<bool>> visited;   // stany czy cos zostalo odwiedzone
-    std::vector<std::vector<std::pair<int, int>>> parents; //stany rodzicow
+    std::vector<std::vector<bool>> visited;   // stany pol, czy zostaly odwiedzone
+    std::vector<std::vector<std::pair<int, int>>> parents; // na wspolrzednych row col zawarta jest informacja o poprzednim polu (skad przyszlismy)
     std::vector<bool> pos_state;              // mozliwe drogi z danego polozenia
-    std::pair<int, int> position(pos1_row, pos1_col);
+    std::pair<int, int> position(pos1_row, pos1_col); //pozycja startowac
 
     visited.resize(arena_row, std::vector<bool>(arena_col)); // resize areny booli
-    parents.resize(arena_row, std::vector<std::pair<int, int>>(arena_col));
-    //std::make_pair(-1, -1)
+    parents.resize(arena_row, std::vector<std::pair<int, int>>(arena_col)); // resize 
 
-    myqueue.push(position1);
-    visited[position.first][position.second] = true;
+    myqueue.push(position); // wrzucam pierwsza pozycje do kolejki
+    visited[position.first][position.second] = true; // zaznaczam odwiedzony stan
 
     while (!myqueue.empty())
     {
@@ -150,17 +147,15 @@ void Tron::bfs()
 
         para = myqueue.front();   // czyta aktualna pozycje, "para" staje sie aktualnym polozeniem
         myqueue.pop();
-
-        //std::cerr << "Obecna pozycja: " << para.first << ' ' << para.second << std::endl;
-        //std::cerr << "Parent pozycji: " << parents[para.first][para.second].first << ' ' <<
-        parents[para.first][para.second].second << std::endl << std::endl;
-        //if(!visited[para.first][para.second])
-        if (arena[para.first][para.second] == '2')
+        
+        if (arena[para.first][para.second] == '2') // jaka decyzje podjac po odnalezieniu przeciwnika
         {
-            // zwrocic sciezke, bo znalezlismy przeciwnika, pozniej mozna zmienic na co innego
             std::cerr << "Znaleziona 2: " << para.first << ' ' << para.second << std::endl;
             //while do miejsca poczatkowego
-            while(para = parents[para.first][para.second]) std::cerr << "Powrot na pole: " << para.first << ' ' << para.second << std::endl;
+            while((para.first = parents[para.first][para.second].first) && (para.second = parents[para.first][para.second].second))
+            std::cerr << "Powrot na pole: " << para.first << ' ' << para.second << std::endl;
+            
+
 
             break;
         }
@@ -169,7 +164,6 @@ void Tron::bfs()
 
         // Przetworzenie pol pod wzgledem mozliwosci podrozy
         pos_state = isWall(para.first, para.second);
-
         std::pair<int, int> pozycja[4] = {{para.first - 1, para.second}, {para.first, para.second + 1}, {para.first + 1, para.second}, {para.first, para.second - 1}};
         for (int i = 0; i < 4; ++i)
         {
@@ -227,5 +221,5 @@ void Tron::makeMove()
     //struct timespec ts;
     //clock_gettime(CLOCK_MONOTONIC, &ts);
     //std::srand((time_t)ts.tv_nsec);
-    std::cout << maxEl(direction1) + 1;
+    //std::cout << maxEl(direction1) + 1;
 }
