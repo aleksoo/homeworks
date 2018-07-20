@@ -139,32 +139,70 @@ void Tron::bfs()
 
     myqueue.push(position); // wrzucam pierwsza pozycje do kolejki
     visited[position.first][position.second] = true; // zaznaczam odwiedzony stan
-
+    
+    //parents[position.first][position.second].first = -1;
+    //parents[position.first][position.second].second = -1;
     while (!myqueue.empty())
     {
 
-        std::pair<int, int> para; // "para" to obecna pozycja do przettworzenia
-
-        para = myqueue.front();   // czyta aktualna pozycje, "para" staje sie aktualnym polozeniem
+        std::pair<int, int> paraPos; // "para" to obecna pozycja do przettworzenia
+        paraPos = myqueue.front();   // czyta aktualna pozycje, "para" staje sie aktualnym polozeniem
         myqueue.pop();
-        
-        if (arena[para.first][para.second] == '2') // jaka decyzje podjac po odnalezieniu przeciwnika
+        //std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;
+        if (arena[paraPos.first][paraPos.second] == '2') // jaka decyzje podjac po odnalezieniu przeciwnika
         {
-            std::cerr << "Znaleziona 2: " << para.first << ' ' << para.second << std::endl;
+            std::cerr << "Znaleziona 2: " << paraPos.first << ' ' << paraPos.second << std::endl;
             //while do miejsca poczatkowego
-            while((para.first = parents[para.first][para.second].first) && (para.second = parents[para.first][para.second].second))
-            std::cerr << "Powrot na pole: " << para.first << ' ' << para.second << std::endl;
-            
+            while((paraPos.first != position.first) || (paraPos.second != position.second)) {
+                paraPos = parents[paraPos.first][paraPos.second]; // DOBRA, TUTAJ SIE DZIEJA DZIWNE RZECZY, DOCHODZI MI DO AKTUALNEGO STANU
+                std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
+            } // JAK SIE TEN WHILE SKONCZY TO paraPos MA POLE NA KTORE NALEZY ISC JEZELI CHCEMY ISC W STRONE PRZECIWNIKA
+            if(position.first < paraPos.first){ // jestesmy nizej
+                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
+                    std::cout << 4;
+                    break;
+                }
+                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
+                    std::cout << 2;
+                    break;
+                }
+                if(position.second == paraPos.second){ // jestesmy nizej, idziemy do gory
+                    std::cout << 1;
+                    break;
+                }
+            } else if(position.first > paraPos.first){ // jestesmy wyzej
+                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
+                    std::cout << 4;
+                    break;
+                }
+                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
+                    std::cout << 2;
+                    break;
+                }
+                if(position.second == paraPos.second){ // jestesmy wyzej, idziemy w dol
+                    std::cout << 3;
+                    break;
+                }
+            } else { // jestesmy na tej samej wysokosci
+                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
+                    std::cout << 4;
+                    break;
+                }
+                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
+                    std::cout << 2;
+                    break;
+                }
+            }
 
 
             break;
-        }
+        } // koniec while po znalezieniu przeciwnika
         //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
         //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany, ZROBIONE
 
         // Przetworzenie pol pod wzgledem mozliwosci podrozy
-        pos_state = isWall(para.first, para.second);
-        std::pair<int, int> pozycja[4] = {{para.first - 1, para.second}, {para.first, para.second + 1}, {para.first + 1, para.second}, {para.first, para.second - 1}};
+        pos_state = isWall(paraPos.first, paraPos.second);
+        std::pair<int, int> pozycja[4] = {{paraPos.first - 1, paraPos.second}, {paraPos.first, paraPos.second + 1}, {paraPos.first + 1, paraPos.second}, {paraPos.first, paraPos.second - 1}};
         for (int i = 0; i < 4; ++i)
         {
             auto para_dziecko = pozycja[i];
@@ -172,7 +210,7 @@ void Tron::bfs()
             {
                 myqueue.emplace(std::pair<int, int>(para_dziecko.first, para_dziecko.second));
                 visited[para_dziecko.first][para_dziecko.second] = true;
-                parents[para_dziecko.first][para_dziecko.second] = para;
+                parents[para_dziecko.first][para_dziecko.second] = paraPos;
             }
         }
     }

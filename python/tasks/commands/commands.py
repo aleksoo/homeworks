@@ -37,6 +37,8 @@ def get_commands_all():
     '''
     # !!!Your code here!!!
 
+    return Command.__subclasses__() #zwraca liste wszystkich klas dziedziczonych
+
 
 def get_command(name):
     '''
@@ -44,3 +46,11 @@ def get_command(name):
     If not found raise exception informing that given command is not implemented.
     '''
     # !!!Your code here!!!
+
+    lista = []
+    lista = get_commands_all()
+    print(name)
+    for i in lista:
+        cmd = i()
+        if cmd.cmd_name == name:
+            return i

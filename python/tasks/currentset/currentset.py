@@ -13,6 +13,8 @@ def parse(fobj):
 
     root = ES.parse(fobj)
     tbllst = root.findall('.//table')
+    dictionary={}
+    lister=[dictionary]
     for elem in tbllst[0][0]:  # iterating over table/tbody/tr elements
         if elem.tag == 'tr':
             # elem is 'tr' tag with a few children 'td'
@@ -20,6 +22,12 @@ def parse(fobj):
             # for td in elem:
             #    print td.text
             # !!!Your code here!!!
+
+
+            if elem.tag =='/tr':
+                break
+
+    return lister
 
 
 def report(targets):

@@ -31,6 +31,9 @@ def _configlog(loglevel):
     Configure logging
     '''
     # !!!Your code here!!!
+
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(level = loglevel)
     return logger
 
 
@@ -43,7 +46,10 @@ def _usage(prog):
     # in the form:
     #     <command name>           - <command description>
     # !!!Your code here!!!
-    print (s % basename(prog))
+
+
+    for i in prog:
+        print (s % basename(prog))
     sys.exit(1)
 
 
@@ -63,7 +69,31 @@ def main(argv):
 
     # !!!Your code here!!!
 
-    getopt.getopt(argv[1:], 'h:v', ['help', 'verbose'])
+    loglevel = logging.DEBUG
+
+
+
+    try:
+        opts, args = getopt.getopt(argv[1:], 'h:v', ['help', 'verbose'])
+    except getopt.GetoptError as err:
+        print(err)
+        _usage(args[0])
+        sys.exit(2)
+
+    verbose = False
+
+    for o in opts:
+        if o in ("-v", "--verbose"):
+            verbose = True
+        if (o in ("-h", "--help")) and verbose:
+            _usage(argv[0])
+            sys.exit()
+
+    for a in args:
+        if a not in ("-v", "--verbose", "-h", "--help"):
+            command = a
+            #print(command)
+            break
 
 
     logger = _configlog(loglevel)
@@ -76,6 +106,9 @@ def main(argv):
         # and `execute` method of this instance should be called
         #
         # !!!Your code here!!!
+        cmd = cmdclass()
+        cmd.execute()
+        
         
         #tutaj nizej dalem "as" w miejsce przecinka, w razie czego zamienic
     except Exception as ex:
