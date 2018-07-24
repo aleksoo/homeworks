@@ -61,6 +61,8 @@ int Tron::getPos2(int c)
     ;
 }
 
+
+
 void Tron::loadDir(const int check_row, const int check_col, std::vector<int> &direction)
 {
     if (direction.size() != 4)
@@ -153,50 +155,21 @@ void Tron::bfs()
         {
             std::cerr << "Znaleziona 2: " << paraPos.first << ' ' << paraPos.second << std::endl;
             //while do miejsca poczatkowego
-            while((paraPos.first != position.first) || (paraPos.second != position.second)) {
-                paraPos = parents[paraPos.first][paraPos.second]; // DOBRA, TUTAJ SIE DZIEJA DZIWNE RZECZY, DOCHODZI MI DO AKTUALNEGO STANU
-                std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
+            while((parents[paraPos.first][paraPos.second].first != position.first) || (parents[paraPos.first][paraPos.second].second != position.second)) {
+                paraPos = parents[paraPos.first][paraPos.second]; 
+                //std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
             } // JAK SIE TEN WHILE SKONCZY TO paraPos MA POLE NA KTORE NALEZY ISC JEZELI CHCEMY ISC W STRONE PRZECIWNIKA
-            if(position.first < paraPos.first){ // jestesmy nizej
-                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
-                    std::cout << 4;
-                    break;
-                }
-                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
-                    std::cout << 2;
-                    break;
-                }
-                if(position.second == paraPos.second){ // jestesmy nizej, idziemy do gory
-                    std::cout << 1;
-                    break;
-                }
-            } else if(position.first > paraPos.first){ // jestesmy wyzej
-                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
-                    std::cout << 4;
-                    break;
-                }
-                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
-                    std::cout << 2;
-                    break;
-                }
-                if(position.second == paraPos.second){ // jestesmy wyzej, idziemy w dol
-                    std::cout << 3;
-                    break;
-                }
-            } else { // jestesmy na tej samej wysokosci
-                if(position.second > paraPos.second){ //jestesmy po prawej, idziemy w lewo
-                    std::cout << 4;
-                    break;
-                }
-                if(position.second < paraPos.second){ //jestesmy po lewej, idziemy w prawo
-                    std::cout << 2;
-                    break;
-                }
+            if(paraPos.first == position.first){
+                if(paraPos.second < position.second) std::cout << 4;
+                else std::cout << 2;
+            } else if(paraPos.second == position.second){
+                if(paraPos.first < position.first) std::cout << 1;
+                else std::cout << 3;
             }
-
 
             break;
         } // koniec while po znalezieniu przeciwnika
+
         //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
         //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany, ZROBIONE
 
@@ -214,28 +187,34 @@ void Tron::bfs()
             }
         }
     }
+    //to jest miejsce, gdzie mam wpisywac rzeczy jak sie nei znajdzie przeciwniora
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    std::srand((time_t)ts.tv_nsec);
+    loadDir(pos1_row, pos1_col, direction1);
+    std::cout << maxEl(direction1) + 1;
 }
 
 std::vector<bool> Tron::isWall(const int row, const int col)
 {
     std::vector<bool> directions;
     directions.resize(4);
-    if (arena[row - 1][col] != '#')
-        directions[0] = true;
-    else
+    if (arena[row - 1][col] == ' ')
         directions[0] = false;
-    if (arena[row + 1][col] != '#')
-        directions[2] = true;
     else
+        directions[0] = true;
+    if (arena[row + 1][col] == ' ')
         directions[2] = false;
-    if (arena[row][col + 1] != '#')
-        directions[1] = true;
     else
+        directions[2] = true;
+    if (arena[row][col + 1] == ' ')
         directions[1] = false;
-    if (arena[row][col - 1] != '#')
-        directions[3] = true;
     else
+        directions[1] = true;
+    if (arena[row][col - 1] == ' ')
         directions[3] = false;
+    else
+        directions[3] = true;
     return directions;
 }
 
@@ -253,11 +232,8 @@ int Tron::maxEl(const std::vector<int> &wektor)
 void Tron::makeMove()
 {
 
-    loadDir(pos1_row, pos1_col, direction1);
+    
     bfs();
     //loadDir(pos2_row, pos2_col, direction2);
-    //struct timespec ts;
-    //clock_gettime(CLOCK_MONOTONIC, &ts);
-    //std::srand((time_t)ts.tv_nsec);
-    //std::cout << maxEl(direction1) + 1;
+
 }
