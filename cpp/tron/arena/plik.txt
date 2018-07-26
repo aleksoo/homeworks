@@ -1,54 +1,19 @@
-25 25
-#########################
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#           #     1     #
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#                       #
-############ ############
-#                       #
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#     2     #           #
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#           #           #
-#########################
-6 18
-18 6
+16 15
+################
+#       ########
+#       ########
+#       #####  #
+#   1     #### #
+#   ###### # # #
+#      ####2## #
+#     ######## #
+#    ####### ###
+#   ########  ##
+#  ########  ###
+#  # ######  ###
+# ##          ##
+###           ##
+################
+4 4
+6 11
 ========= 
-Znaleziona 2: 18 6
-Powrot na pole: 18 6
-Powrot na pole: 18 7
-Powrot na pole: 18 8
-Powrot na pole: 18 9
-Powrot na pole: 18 10
-Powrot na pole: 18 11
-Powrot na pole: 17 11
-Powrot na pole: 16 11
-Powrot na pole: 15 11
-Powrot na pole: 14 11
-Powrot na pole: 13 11
-Powrot na pole: 13 12
-Powrot na pole: 12 12
-Powrot na pole: 11 12
-Powrot na pole: 11 13
-Powrot na pole: 11 14
-Powrot na pole: 11 15
-Powrot na pole: 11 16
-Powrot na pole: 11 17
-Powrot na pole: 11 18
-Powrot na pole: 10 18
-Powrot na pole: 9 18
-Powrot na pole: 8 18
-Powrot na pole: 7 18

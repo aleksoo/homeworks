@@ -142,15 +142,13 @@ void Tron::bfs()
     myqueue.push(position); // wrzucam pierwsza pozycje do kolejki
     visited[position.first][position.second] = true; // zaznaczam odwiedzony stan
     
-    //parents[position.first][position.second].first = -1;
-    //parents[position.first][position.second].second = -1;
     while (!myqueue.empty())
     {
 
         std::pair<int, int> paraPos; // "para" to obecna pozycja do przettworzenia
         paraPos = myqueue.front();   // czyta aktualna pozycje, "para" staje sie aktualnym polozeniem
         myqueue.pop();
-        //std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;
+
         if (arena[paraPos.first][paraPos.second] == '2') // jaka decyzje podjac po odnalezieniu przeciwnika
         {
             std::cerr << "Znaleziona 2: " << paraPos.first << ' ' << paraPos.second << std::endl;
@@ -158,7 +156,7 @@ void Tron::bfs()
             while((parents[paraPos.first][paraPos.second].first != position.first) || (parents[paraPos.first][paraPos.second].second != position.second)) {
                 paraPos = parents[paraPos.first][paraPos.second]; 
                 //std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
-            } // JAK SIE TEN WHILE SKONCZY TO paraPos MA POLE NA KTORE NALEZY ISC JEZELI CHCEMY ISC W STRONE PRZECIWNIKA
+            } 
             if(paraPos.first == position.first){
                 if(paraPos.second < position.second) std::cout << 4;
                 else std::cout << 2;
@@ -171,7 +169,6 @@ void Tron::bfs()
         } // koniec while po znalezieniu przeciwnika
 
         //przetworzenie danych, wyliczenie oplacalnosci czy cos, wtedy zmodyfikowac loadDir zeby zwracal cos sensownego
-        //zakolejkowac dzieci pary, wrzucic do myqueue sasiednie stany, ZROBIONE
 
         // Przetworzenie pol pod wzgledem mozliwosci podrozy
         pos_state = isWall(paraPos.first, paraPos.second);
@@ -188,6 +185,9 @@ void Tron::bfs()
         }
     }
     //to jest miejsce, gdzie mam wpisywac rzeczy jak sie nei znajdzie przeciwniora
+
+    
+
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     std::srand((time_t)ts.tv_nsec);
