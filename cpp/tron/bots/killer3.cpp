@@ -58,7 +58,6 @@ int Tron::getPos2(int c)
         return static_cast<int>(pos2_row);
     else
         return static_cast<int>(pos2_col);
-    ;
 }
 
 
@@ -155,7 +154,7 @@ void Tron::bfs()
             //while do miejsca poczatkowego
             while((parents[paraPos.first][paraPos.second].first != position.first) || (parents[paraPos.first][paraPos.second].second != position.second)) {
                 paraPos = parents[paraPos.first][paraPos.second]; 
-                //std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
+                std::cerr << "Powrot na pole: " << paraPos.first << ' ' << paraPos.second << std::endl;                
             } 
             if(paraPos.first == position.first){
                 if(paraPos.second < position.second) std::cout << 4;
@@ -184,14 +183,13 @@ void Tron::bfs()
             }
         }
     }
-    //to jest miejsce, gdzie mam wpisywac rzeczy jak sie nei znajdzie przeciwniora
-
-    
+    //to jest miejsce, gdzie mam wpisywac rzeczy jak sie nei znajdzie przeciwniora    
 
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     std::srand((time_t)ts.tv_nsec);
     loadDir(pos1_row, pos1_col, direction1);
+    
     std::cout << maxEl(direction1) + 1;
 }
 
@@ -230,10 +228,7 @@ int Tron::maxEl(const std::vector<int> &wektor)
 }
 
 void Tron::makeMove()
-{
-
-    
+{    
     bfs();
-    //loadDir(pos2_row, pos2_col, direction2);
 
 }
